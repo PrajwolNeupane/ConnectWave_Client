@@ -53,4 +53,7 @@ input::-webkit-inner-spin-button {
   .input-container-sm select {
     @apply focus:outline-none bg-gray-100 px-[10px] py-[4px] placeholder:text-gray-500 text-gray-700 text-xxs placeholder:text-xxs font-medium border-[1px] border-gray-200 rounded-md w-[150px];
   }
+  .input-error {
+    @apply text-xxxs text-[red] font-semibold mt-1;
+  }
 }

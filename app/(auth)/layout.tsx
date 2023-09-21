@@ -1,8 +1,6 @@
-import Navbar from "@/components/NavBar";
+import { ClerkProvider } from "@clerk/nextjs";
 import "../globals.css";
 import { Montserrat } from "next/font/google";
-import LeftSideBar from "@/components/LeftSideBar";
-import RightSideBar from "@/components/RightSideBar";
 
 export const metadata = {
   title: "Connect Wave",
@@ -17,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={montserrat.className}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
