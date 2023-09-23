@@ -67,7 +67,7 @@ export default function Home() {
         </h4>
       </form>
       <Link
-        href={"https://sweet-skink-37.accounts.dev/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F"}
+        href={"/"}
         className="flex items-center bg-white shadow px-5 py-2 rounded-md gap-5 w-[360px] cursor-pointer"
       >
         <Image

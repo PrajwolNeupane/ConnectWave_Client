@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         brand: "#9C00CD",
+        sucess:'#4BB543'
       },
       fontWeight: {
         bold: "600",

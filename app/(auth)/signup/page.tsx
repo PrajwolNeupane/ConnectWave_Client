@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema, signUpInterface } from "@/types/form.schema";
 import submitForm from "./submitForm";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const {
@@ -19,7 +20,7 @@ export default function Home() {
       <form
         className="flex flex-col py-5 px-8 shadow gap-4 bg-white rounded-lg"
         onSubmit={handleSubmit((data) => {
-          submitForm({ data: data });
+          submitForm({ data, toast });
         })}
       >
         <h2 className="font-semibold text-md text-gray-700">Sign Up</h2>
@@ -99,7 +100,11 @@ export default function Home() {
           <div className="flex gap-5 items-center">
             <div className="input-container">
               <label className="label-text">Phone</label>
-              <input placeholder="1234567890" type="number" {...register("phone")}/>
+              <input
+                placeholder="1234567890"
+                type="number"
+                {...register("phone")}
+              />
             </div>
             <div className="flex gap-2 items-center">
               <div className="input-container-sm">

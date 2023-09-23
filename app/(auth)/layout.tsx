@@ -1,6 +1,7 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import "../globals.css";
 import { Montserrat } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Connect Wave",
@@ -15,10 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={montserrat.className}>{children}</body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={montserrat.className}>
+        {children}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          theme="light"
+        />
+      </body>
+    </html>
   );
 }

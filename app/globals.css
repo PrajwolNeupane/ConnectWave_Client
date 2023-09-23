@@ -1,6 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --success-color: #4bb543;
+  --failure-color: rgb(255, 0, 0);
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -31,6 +38,23 @@ input::-webkit-inner-spin-button {
 .shadow {
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
 }
+/* Toast  */
+
+.Toastify__toast-theme--light.Toastify__toast--success {
+  color: var(--success-color);
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--error {
+  color: var(--failure-color);
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+}
+
+
 @layer components {
   .label-text {
     @apply text-xxs font-medium text-gray-700;
