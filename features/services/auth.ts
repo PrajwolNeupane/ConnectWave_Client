@@ -10,3 +10,9 @@ export const useSignUp = async (body: signUpInterface) => {
   );
   return response;
 };
+
+
+export const useAuth = async () => {
+  const response = await api.get(`${baseEnd}/me`);
+  return response.data;
+};
