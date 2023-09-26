@@ -3,6 +3,7 @@ import "../globals.css";
 import { Montserrat } from "next/font/google";
 import LeftSideBar from "@/components/LeftSideBar";
 import RightSideBar from "@/components/RightSideBar";
+import QueryProvider from "@/Layout/Provider";
 
 export const metadata = {
   title: "Connect Wave",
@@ -20,9 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <>
-          <Navbar />
+          <QueryProvider Children={<Navbar />} />
           <div className="flex items-start  bg-gray-100 w-full py-[2%] px-[5%] justify-between">
-            <LeftSideBar />
+            <QueryProvider Children={<LeftSideBar />} />
             {children}
             <RightSideBar />
           </div>

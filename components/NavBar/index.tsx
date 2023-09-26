@@ -1,3 +1,4 @@
+"use client";
 import SearchIcon from "@/assets/icons/SearchIcons";
 import Image from "next/image";
 import ColoredFullLogo from "../../assets/logos/connect_wave_colored_full_logo.svg";
@@ -5,8 +6,30 @@ import ActiveHome from "../../assets/icons/home_active.svg";
 import InActiveMessage from "../../assets/icons/message_inactive.svg";
 import InActiveNotification from "../../assets/icons/notification_inactive.svg";
 import InActiveExplore from "../../assets/icons/explor_inactive.svg";
+import { useQuery } from "react-query";
+import { useAuth } from "@/features/services/auth";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/features/hooks";
+import { setAuth } from "@/features/slices/auth";
 
 export default function Navbar() {
+  const dispatch = useAppDispatch();
+
+  const { data, isLoading } = useQuery({
+    queryFn: useAuth,
+    refetchOnWindowFocus: true,
+  });
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (data?.success) {
+        dispatch(setAuth(data?.user));
+      } else {
+        dispatch(setAuth(undefined));
+      }
+    }
+  }, [isLoading]);
+
   return (
     <div className="bg-white w-full px-[5%] py-1 flex items-center justify-between sticky top-0 shadow z-[5]">
       <div className="flex items-center gap-5">
@@ -59,9 +82,15 @@ export default function Navbar() {
         </div>
         <hr className="w-[1px] h-[40px] bg-gray-400" />
         <div className="flex items-center gap-2">
-          <div className="w-[40px] h-[40px] rounded-full bg-gray-700"></div>
+          <Image
+            src={data?.user?.photourl!}
+            alt={`Profile Photo of ${data?.user?.username}`}
+            width={60}
+            height={60}
+            className="w-[40px] h-[40px] rounded-full bg-gray-700"
+          />
           <h3 className="font-bold text-xxs text-gray-700 max-md:hidden">
-            Prajwol Neupane
+            {data?.user?.firstname + " " + data?.user?.lastname}
           </h3>
         </div>
       </div>

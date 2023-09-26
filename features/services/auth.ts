@@ -19,6 +19,30 @@ export const useLogIn = async (body: logInInterface) => {
 };
 
 export const useAuth = async () => {
-  const response = await api.get(`${baseEnd}/me`);
+  const response: {
+    data: {
+      message: string;
+      success: boolean;
+      user:
+        | {
+            _id: string;
+            clerkid: string;
+            username: string;
+            firstname: string;
+            lastname: string;
+            email: string;
+            photourl: string;
+            coverphotourl: string;
+            dob: string;
+            gender: string;
+            followers: string[];
+            following: string[];
+            posts: string[];
+            createdAt: string;
+            updatedAt: string;
+          }
+        | undefined;
+    };
+  } = await api.get(`${baseEnd}/me`);
   return response.data;
 };
