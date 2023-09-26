@@ -5,8 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema, signUpInterface } from "@/types/form.schema";
 import submitForm from "./submitForm";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     register,
@@ -20,7 +23,13 @@ export default function Home() {
       <form
         className="flex flex-col py-5 px-8 shadow gap-4 bg-white rounded-lg"
         onSubmit={handleSubmit((data) => {
-          submitForm({ data, toast });
+          submitForm({
+            data,
+            toast,
+            onSuccess: () => {
+              push("/");
+            },
+          });
         })}
       >
         <h2 className="font-semibold text-md text-gray-700">Sign Up</h2>

@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
   if (isPublicPath && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-  if (path === "/cart" && !token) {
+  if (path === "/" && !token) {
     return NextResponse.redirect(new URL("/signin", request.nextUrl));
   }
 }

@@ -6,8 +6,12 @@ import { logInInterface, logInSchema } from "@/types/form.schema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import submitForm from "./submitForm";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     register,
@@ -20,7 +24,13 @@ export default function Home() {
     <div className="bg-gray-100 w-[100vw] h-[100vh] flex flex-col gap-8 items-center justify-center">
       <form
         onSubmit={handleSubmit((data) => {
-          submitForm({ data: data });
+          submitForm({
+            data: data,
+            toast: toast,
+            onSuccess: () => {
+              push('/')
+            },
+          });
         })}
         className="flex flex-col py-5 px-8 shadow gap-4 bg-white rounded-lg"
       >
@@ -44,7 +54,7 @@ export default function Home() {
             <input
               placeholder="*******"
               type="password"
-              {...register("email")}
+              {...register("password")}
             />
             {errors.password != null ? (
               <p className="input-error">{errors.password.message}</p>

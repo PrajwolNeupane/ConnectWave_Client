@@ -1,4 +1,4 @@
-import { signUpInterface } from "@/types/form.schema";
+import { logInInterface, signUpInterface } from "@/types/form.schema";
 import { api } from "../endpoints/api";
 
 const baseEnd = "/auth";
@@ -10,7 +10,13 @@ export const useSignUp = async (body: signUpInterface) => {
   );
   return response;
 };
-
+export const useLogIn = async (body: logInInterface) => {
+  const response = await api.post<any, logInInterface>(
+    `${baseEnd}/login`,
+    body
+  );
+  return response;
+};
 
 export const useAuth = async () => {
   const response = await api.get(`${baseEnd}/me`);
