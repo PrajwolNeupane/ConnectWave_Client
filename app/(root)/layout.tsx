@@ -1,8 +1,6 @@
 import Navbar from "@/components/NavBar";
 import "../globals.css";
 import { Montserrat } from "next/font/google";
-import LeftSideBar from "@/components/LeftSideBar";
-import RightSideBar from "@/components/RightSideBar";
 import QueryProvider from "@/Layout/Provider";
 
 export const metadata = {
@@ -20,14 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <>
-          <QueryProvider Children={<Navbar />} />
-          <div className="flex items-start  bg-gray-100 w-full py-[2%] px-[5%] justify-between">
-            <QueryProvider Children={<LeftSideBar />} />
-            {children}
-            <RightSideBar />
-          </div>
-        </>
+        <QueryProvider Children={<Navbar />} />
+        {children}
       </body>
     </html>
   );

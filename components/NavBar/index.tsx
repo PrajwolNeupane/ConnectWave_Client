@@ -3,6 +3,7 @@ import SearchIcon from "@/assets/icons/SearchIcons";
 import Image from "next/image";
 import ColoredFullLogo from "../../assets/logos/connect_wave_colored_full_logo.svg";
 import ActiveHome from "../../assets/icons/home_active.svg";
+import InActiveHome from "../../assets/icons/home_inactive.svg";
 import InActiveMessage from "../../assets/icons/message_inactive.svg";
 import InActiveNotification from "../../assets/icons/notification_inactive.svg";
 import InActiveExplore from "../../assets/icons/explor_inactive.svg";
@@ -11,9 +12,12 @@ import { useAuth } from "@/features/services/auth";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/features/hooks";
 import { setAuth } from "@/features/slices/auth";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
 
   const { data, isLoading } = useQuery({
     queryFn: useAuth,
@@ -24,6 +28,7 @@ export default function Navbar() {
     if (!isLoading) {
       if (data?.success) {
         dispatch(setAuth(data?.user));
+        console.log(pathname);
       } else {
         dispatch(setAuth(undefined));
       }
@@ -40,6 +45,7 @@ export default function Navbar() {
           alt="colored full logo"
           className="w-[90px]"
         />
+
         <div className="bg-gray-100 py-2 px-3 rounded-md flex gap-3 items-center max-rg:hidden">
           <SearchIcon
             height="18"
@@ -55,12 +61,23 @@ export default function Navbar() {
       </div>
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-[40px]">
-          <Image
-            src={ActiveHome}
-            width={20}
-            height={20}
-            alt="active home icon"
-          />
+          <Link href={"/"}>
+            {pathname == "/" ? (
+              <Image
+                src={ActiveHome}
+                width={20}
+                height={20}
+                alt="active home icon"
+              />
+            ) : (
+              <Image
+                src={InActiveHome}
+                width={20}
+                height={20}
+                alt="inactive home icon"
+              />
+            )}
+          </Link>
           <Image
             src={InActiveExplore}
             width={20}
@@ -83,7 +100,10 @@ export default function Navbar() {
         <hr className="w-[1px] h-[40px] bg-gray-400" />
         {data?.user != undefined ? (
           <>
-            <div className="flex items-center gap-2">
+            <Link
+              href={`profile/${data?.user._id}`}
+              className="flex items-center gap-2 cursor-pointer"
+            >
               <Image
                 src={data?.user?.photourl!}
                 alt={`Profile Photo of ${data?.user?.username}`}
@@ -94,7 +114,7 @@ export default function Navbar() {
               <h3 className="font-bold text-xxs text-gray-700 max-md:hidden">
                 {data?.user?.firstname + " " + data?.user?.lastname}
               </h3>
-            </div>
+            </Link>
           </>
         ) : (
           <div className="flex items-center gap-2">
