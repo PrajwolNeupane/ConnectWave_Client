@@ -94,7 +94,7 @@ export default function RightSideBar() {
               Saran Adhikari
             </h3>
             <h3 className="text-xxxs font-semibold text-gray-900">
-              You: Nex.js try gara aba
+              You: Next.js try gara aba
             </h3>
           </div>
         </div>

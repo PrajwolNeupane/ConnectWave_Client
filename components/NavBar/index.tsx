@@ -81,18 +81,27 @@ export default function Navbar() {
           />
         </div>
         <hr className="w-[1px] h-[40px] bg-gray-400" />
-        <div className="flex items-center gap-2">
-          <Image
-            src={data?.user?.photourl!}
-            alt={`Profile Photo of ${data?.user?.username}`}
-            width={60}
-            height={60}
-            className="w-[40px] h-[40px] rounded-full bg-gray-700"
-          />
-          <h3 className="font-bold text-xxs text-gray-700 max-md:hidden">
-            {data?.user?.firstname + " " + data?.user?.lastname}
-          </h3>
-        </div>
+        {data?.user != undefined ? (
+          <>
+            <div className="flex items-center gap-2">
+              <Image
+                src={data?.user?.photourl!}
+                alt={`Profile Photo of ${data?.user?.username}`}
+                width={60}
+                height={60}
+                className="w-[40px] h-[40px] rounded-full bg-gray-700"
+              />
+              <h3 className="font-bold text-xxs text-gray-700 max-md:hidden">
+                {data?.user?.firstname + " " + data?.user?.lastname}
+              </h3>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center gap-2">
+            <div className="w-[40px] h-[40px] rounded-full bg-gray-400"></div>
+            <h3 className="font-bold text-xxs max-md:hidden bg-gray-400 h-[30px] w-[140px] rounded-md"></h3>
+          </div>
+        )}
       </div>
     </div>
   );

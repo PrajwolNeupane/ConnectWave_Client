@@ -13,7 +13,7 @@ interface AuthInterface {
         coverphotourl: string;
         dob: string;
         gender: string;
-        followers: string[];
+        followers: Array<string>;
         following: string[];
         posts: string[];
         createdAt: string;

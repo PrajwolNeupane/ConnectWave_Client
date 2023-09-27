@@ -8,41 +8,57 @@ export default function LeftSideBar() {
 
   return (
     <div className="max-lg:hidden w-[22%] px-[1.5%] py-[1%] bg-white min-h-[70vh] max-h-[80vh] rounded-lg fixed left-[5%] flex flex-col shadow">
-      <Image
-        src={user?.coverphotourl!}
-        width={1000}
-        height={1000}
-        alt={`Profile Photo of ${user?.username}`}
-        className="w-full min-h-[130px] rounded-md"
-      />
+      {user == undefined ? (
+        <div className="w-full min-h-[130px] rounded-md bg-gray-400"></div>
+      ) : (
+        <Image
+          src={user?.coverphotourl!}
+          width={1000}
+          height={1000}
+          alt={`Profile Photo of ${user?.username}`}
+          className="w-full max-h-[130px] rounded-md"
+        />
+      )}
       <div></div>
       <div className="mt-[-10%] ml-[5%] flex justify-start items-end gap-1">
-        <Image
-          src={user?.photourl!}
-          width={100}
-          height={100}
-          className="w-[80px] aspect-square rounded-full bg-brand  border-[5px] border-white"
-          alt={`Profile Photo of ${user?.username}`}
-        />
+        {user == undefined ? (
+          <div className="w-[80px] aspect-square rounded-full bg-gray-400  border-[5px] border-white"></div>
+        ) : (
+          <Image
+            src={user?.photourl!}
+            width={100}
+            height={100}
+            className="w-[80px] aspect-square rounded-full bg-brand  border-[5px] border-white"
+            alt={`Profile Photo of ${user?.username}`}
+          />
+        )}
         <div className="flex flex-col w-[calc(100%-80px)] items-start mb-3">
-          <h2 className="text-xxs font-bold text-gray-800">
-            @{user?.username}
-          </h2>
-          <h4 className="text-xxxs font-semibold text-gray-600">
-            {user?.firstname + " " + user?.lastname}
-          </h4>
+          {user == undefined ? (
+            <></>
+          ) : (
+            <h2 className="text-xxs font-bold text-gray-800">
+              {"@" + user?.username}
+            </h2>
+          )}
+          {user == undefined ? (
+            <></>
+          ) : (
+            <h4 className="text-xxxs font-semibold text-gray-600">
+              {user?.firstname + " " + user?.lastname}
+            </h4>
+          )}
         </div>
       </div>
       <div className="flex justify-between mt-2">
         <div className="flex flex-col items-center max-w-[33%]">
           <h2 className="text-sm font-bold text-gray-800">
-            {user?.followers.length}
+            {user == undefined ? 0 : user?.followers.length}
           </h2>
           <h4 className="text-xxxs font-semibold text-gray-400">Followers</h4>
         </div>
         <div className="flex flex-col items-center max-w-[33%]">
           <h2 className="text-sm font-bold text-gray-800">
-            {user?.following.length}
+            {user == undefined ? 0 : user?.following.length}
           </h2>
           <h4 className="text-xxxs font-semibold text-gray-400">Following</h4>
         </div>
