@@ -18,6 +18,8 @@ export default function ProfileEditModal() {
     setValue("lastname", user?.lastname!);
     setValue("gender", user?.gender!);
     setValue("dob", Date.now().toString());
+    setValue("phone", user?.phone);
+    setValue("bio", user?.bio);
   }, [user]);
 
   return (
@@ -123,9 +125,12 @@ export default function ProfileEditModal() {
               placeholder="Your Description..."
               className="resize-none focus:outline-none border border-gray-400 rounded-md p-2 text-xxs font-semibold text-gray-800 w-full"
               rows={5}
+              {...register("bio")}
             ></textarea>
           </div>
-          <button className="bg-brand rounded-[4px] w-1/2 py-1 text-xxs font-semibold text-white mx-auto">Change</button>
+          <button className="bg-brand rounded-[4px] w-1/2 py-1 text-xxs font-semibold text-white mx-auto">
+            Change
+          </button>
         </div>
       </div>
     </form>

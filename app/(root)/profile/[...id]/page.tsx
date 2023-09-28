@@ -2,7 +2,7 @@ import PostCard from "@/components/PostCard";
 import axios from "axios";
 import Image from "next/image";
 
-export default async function Page() {
+export default async function Page({ params }: { params: { id: string } }) {
   const response: {
     data: {
       success: boolean;
@@ -26,8 +26,9 @@ export default async function Page() {
           }
         | undefined;
     };
-  } = await axios.get("http://localhost:8000/auth/prajwol");
-  if (response.data.success) {
+  } = await axios.get(`http://localhost:8000/auth/${params.id}`);
+
+  if (response.data.success && response.data.user != null) {
     return (
       <>
         <div className="px-[15%] flex flex-col bg-white pb-3 shadow">
@@ -100,5 +101,7 @@ export default async function Page() {
         </div>
       </>
     );
+  } else {
+    return <h2>User not found</h2>;
   }
 }

@@ -59,6 +59,7 @@ export const editProfileSchema = y.object({
   dob: y.string().required("Please enter date of brith"),
   gender: y.string().required("Please enter gender"),
   phone: y.string(),
+  bio: y.string(),
 });
 
 export type editProfileInterface = y.InferType<typeof editProfileSchema>;

@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <QueryProvider
       Children={
-        <div className="flex items-center justify-center w-full bg-gray-200 py-10">
+        <div className="flex items-center justify-center w-full bg-gray-200 py-5">
           <ProfileEditModal />
         </div>
       }

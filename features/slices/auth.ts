@@ -18,6 +18,8 @@ interface AuthInterface {
         posts: string[];
         createdAt: string;
         updatedAt: string;
+        phone: string | undefined;
+        bio: string | undefined;
       }
     | undefined;
 }
