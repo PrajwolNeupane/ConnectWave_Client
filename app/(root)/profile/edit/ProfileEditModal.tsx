@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import editProfileAction from "./editProfileAction";
+import { toast } from "react-toastify";
+
 export default function ProfileEditModal() {
   const { user } = useAppSelector((state) => state.auth);
   const { handleSubmit, register, setValue } = useForm<editProfileInterface>({
@@ -19,11 +22,16 @@ export default function ProfileEditModal() {
     setValue("gender", user?.gender!);
     setValue("dob", Date.now().toString());
     setValue("phone", user?.phone);
-    setValue("bio", user?.bio);
+    setValue("description", user?.description);
   }, [user]);
 
   return (
-    <form className="w-2/3 p-5 bg-white rounded-md shadow">
+    <form
+      className="w-2/3 p-5 bg-white rounded-md shadow"
+      onSubmit={handleSubmit((data) => {
+        editProfileAction({ data, toast: toast });
+      })}
+    >
       <Image
         src={user?.coverphotourl!}
         width={1000}
@@ -125,10 +133,13 @@ export default function ProfileEditModal() {
               placeholder="Your Description..."
               className="resize-none focus:outline-none border border-gray-400 rounded-md p-2 text-xxs font-semibold text-gray-800 w-full"
               rows={5}
-              {...register("bio")}
+              {...register("description")}
             ></textarea>
           </div>
-          <button className="bg-brand rounded-[4px] w-1/2 py-1 text-xxs font-semibold text-white mx-auto">
+          <button
+            type="submit"
+            className="bg-brand rounded-[4px] w-1/2 py-1 text-xxs font-semibold text-white mx-auto"
+          >
             Change
           </button>
         </div>

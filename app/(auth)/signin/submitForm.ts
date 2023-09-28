@@ -18,7 +18,6 @@ export default async function submitForm({
     } else {
       toast.error(response.data.message);
     }
-    console.log(response);
   } catch (e: any) {
     console.log(e);
     toast.error(e.response.data.message);

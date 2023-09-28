@@ -19,7 +19,7 @@ interface AuthInterface {
         createdAt: string;
         updatedAt: string;
         phone: string | undefined;
-        bio: string | undefined;
+        description: string | undefined;
       }
     | undefined;
 }

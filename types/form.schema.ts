@@ -46,20 +46,10 @@ export const editProfileSchema = y.object({
   username: y.string().required("Please enter username"),
   firstname: y.string().required("Please enter firstname"),
   lastname: y.string().required("Please enter lastname"),
-  oldpassword: y.string().required(),
-  newpassword: y
-    .string()
-    .min(6, "Password length must be greater than 6")
-    .minLowercase(1, "Password must contain at least 1 lower case letter")
-    .minUppercase(1, "Password must contain at least 1 upper case letter")
-    .minNumbers(1, "Password must contain at least 1 number"),
-  confirmpassword: y
-    .string()
-    .oneOf([y.ref("newpassword")], "Password must match"),
   dob: y.string().required("Please enter date of brith"),
   gender: y.string().required("Please enter gender"),
   phone: y.string(),
-  bio: y.string(),
+  description: y.string(),
 });
 
 export type editProfileInterface = y.InferType<typeof editProfileSchema>;

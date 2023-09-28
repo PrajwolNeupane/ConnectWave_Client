@@ -2,6 +2,8 @@ import Navbar from "@/components/NavBar";
 import "../globals.css";
 import { Montserrat } from "next/font/google";
 import QueryProvider from "@/Layout/Provider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "Connect Wave",
@@ -20,6 +22,15 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <QueryProvider Children={<Navbar />} />
         {children}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3500}
+          hideProgressBar={true}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          theme="light"
+        />
       </body>
     </html>
   );
